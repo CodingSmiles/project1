@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755578883545",
+    "project_id": "street-lights-8458e",
+    "storage_bucket": "street-lights-8458e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755578883545:android:48600522661230f0339dc8",
+        "android_client_info": {
+          "package_name": "com.app.flutter.app1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM6x8iDZOD6RfpGyH7GQBaWaR2VQT0a10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
