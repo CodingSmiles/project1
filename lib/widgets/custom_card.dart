@@ -125,7 +125,7 @@ class CustomCard extends StatelessWidget {
               style: TextStyle(
                 color: colorS[1],
                 fontFamily: 'Inter',
-                fontSize: hpw2 * 2.8,
+                fontSize: hpw2 * 3.3,
               ),
             ),
           ],

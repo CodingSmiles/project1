@@ -1,15 +1,17 @@
-import 'package:app1/errors.dart';
-import 'package:app1/home.dart';
-import 'package:app1/splash.dart';
+import 'package:app1/screens/errors.dart';
+import 'package:app1/screens/home.dart';
+import 'package:app1/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'misc/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Project 1",
       home: const Splash(),
       theme: ThemeData(
@@ -21,11 +23,13 @@ void main() async {
           ),
         ),
         appBarTheme: AppBarTheme(
-            color: Colors.blue.shade900,
-            centerTitle: true,
-            titleTextStyle: const TextStyle(
-              fontFamily: 'Inter',
-            )),
+          color: Colors.blue.shade900,
+          centerTitle: true,
+          titleTextStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 30,
+          ),
+        ),
       ),
     ),
   );
@@ -39,6 +43,7 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
+
   bool isBlur = false;
   double opacity = 0.3;
   int pageIndex = 0;
@@ -54,11 +59,14 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size; // get screen size
+    final double width = size.width; // get screen width
+    final double height = size.height; // get screen height
+    final double hpw2 = (height + width) / 200;
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: colour,
           currentIndex: pageIndex,
-          enableFeedback: true,
           onTap: (tap) {
             setState(() {
               pageIndex = tap;
@@ -69,6 +77,9 @@ class _MainState extends State<Main> {
           unselectedIconTheme: const IconThemeData(color: Colors.grey),
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
+          selectedFontSize: hpw2 * 3.4,
+          unselectedFontSize: hpw2 * 2.5,
+          iconSize: hpw2 * 4.2,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

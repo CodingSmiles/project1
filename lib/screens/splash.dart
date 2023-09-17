@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app1/home.dart';
+import 'package:app1/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _SplashState extends State<Splash> {
           () {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => const Home()),
+            MaterialPageRoute(builder: (_) => const Main()),
                 (route) => false,
           );
       },

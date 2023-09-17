@@ -1,3 +1,4 @@
+import 'package:app1/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class Errors extends StatefulWidget {
@@ -17,19 +18,22 @@ class _ErrorsState extends State<Errors> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade900,
-        title: Text(
+        title: const Text(
           "Errors",
-          style: TextStyle(
-            fontSize: hpw2 * 6,
-          ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [],
-          ),
+      body:  SingleChildScrollView(
+        padding: const EdgeInsets.only(
+          left: 12.5,
+          top: 12.5,
+          right: 12.5,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            for (int i = 1; i < 5 ; i++)
+              CustomCard(name: "Data Point $i", desc: 'ABCD1234'),
+          ],
         ),
       ),
     );
