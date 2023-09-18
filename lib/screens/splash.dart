@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({super.key});
+  final List cities;
+  const Splash({super.key, required this.cities});
 
   @override
   State<Splash> createState() => _SplashState();
@@ -19,7 +20,7 @@ class _SplashState extends State<Splash> {
           () {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (_) => const Main()),
+            MaterialPageRoute(builder: (_) => Main(cities: widget.cities)),
                 (route) => false,
           );
       },

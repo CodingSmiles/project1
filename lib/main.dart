@@ -1,19 +1,35 @@
+import 'package:app1/models/streetlight.dart';
 import 'package:app1/screens/errors.dart';
 import 'package:app1/screens/home.dart';
 import 'package:app1/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'misc/firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
+  List cities = [];
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  var db = FirebaseFirestore.instance;
+  var data = await db
+      .collection('cities')
+      .doc('mumbai')
+      .collection('strlghts')
+      .orderBy('id', descending: false)
+      .get();
+  cities = List.from(
+    data.docs.map(
+      (doc) => Streetlight.fromSnapshot(doc),
+    ),
+  );
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Project 1",
-      home: const Splash(),
+      home: Splash(
+        cities: cities,
+      ),
       theme: ThemeData(
         navigationBarTheme: const NavigationBarThemeData(
           labelTextStyle: MaterialStatePropertyAll(
@@ -36,21 +52,30 @@ void main() async {
 }
 
 class Main extends StatefulWidget {
-  const Main({super.key});
+  final List cities;
+
+  const Main({super.key, required this.cities});
 
   @override
   State<Main> createState() => _MainState();
 }
 
 class _MainState extends State<Main> {
-
   bool isBlur = false;
   double opacity = 0.3;
   int pageIndex = 0;
-  final pages = [
-    const Home(),
-    const Errors(),
-  ];
+  List pages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    List cities = widget.cities;
+    pages = [
+      Home(cities: cities),
+      const Errors(),
+    ];
+  }
+
   final colours = [
     Colors.blue.shade900,
     Colors.red.shade900,
@@ -78,15 +103,21 @@ class _MainState extends State<Main> {
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
           selectedFontSize: hpw2 * 3.4,
-          unselectedFontSize: hpw2 * 2.5,
+          unselectedFontSize: hpw2 * 2.8,
           iconSize: hpw2 * 4.2,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+                size: hpw2 * 4.3,
+              ),
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.error),
+              icon: Icon(
+                Icons.error,
+                size: hpw2 * 4.3,
+              ),
               label: "Errors",
             ),
           ],

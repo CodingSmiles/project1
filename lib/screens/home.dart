@@ -1,8 +1,11 @@
-import 'package:app1/widgets/custom_card.dart';
+import 'package:app1/models/streetlight.dart';
+import 'package:app1/widgets/streetlight_card.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final List cities;
+
+  const Home({super.key, required this.cities});
 
   @override
   State<Home> createState() => _HomeState();
@@ -11,9 +14,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size; // get screen size
-    final double width = size.width; // get screen width
-    final double height = size.height; // get screen height
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade900,
@@ -21,19 +21,18 @@ class _HomeState extends State<Home> {
           "Home",
         ),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.only(
           left: 12.5,
           top: 12.5,
           right: 12.5,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            for (int i = 1; i < 46 ; i++)
-               CustomCard(name: "Data Point $i ", desc: 'ABCD1234'),
-          ],
-        ),
+        child: ListView.builder(
+            itemCount: widget.cities.length,
+            itemBuilder: (context, index) {
+              return StreetlightCard(streetlight: widget.cities[index] as Streetlight);
+            },
+          ),
       ),
     );
   }

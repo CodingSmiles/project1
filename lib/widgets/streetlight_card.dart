@@ -1,19 +1,17 @@
 import 'dart:math';
-
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:app1/models/streetlight.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({
-    super.key,
-    required this.name,
-    required this.desc,
-  });
+class StreetlightCard extends StatelessWidget {
+  final Streetlight streetlight;
 
-  final String name;
-  final String desc;
+  const StreetlightCard({super.key, required this.streetlight});
 
   @override
   Widget build(BuildContext context) {
+    var date = DateTime.parse(streetlight.last_service.toString());
+    var formattedDate = "${date.day}-${date.month}-${date.year}";
     List<Color> selectColor() {
       var rng = Random();
       var colors = [
@@ -81,7 +79,6 @@ class CustomCard extends StatelessWidget {
           const Color.fromRGBO(16, 24, 32, 1), // Color
           Colors.white, // Text color (white)
         ],
-
         [
           const Color.fromRGBO(249, 231, 149, 1), // Color
           Colors.black, // Text color (black)
@@ -568,41 +565,105 @@ class CustomCard extends StatelessWidget {
       elevation: hpw2 * 10,
       child: Padding(
         padding: EdgeInsets.fromLTRB(
-          hpw2 * 1.5,
+          hpw2 * 1.1,
           hpw2 * 2.6,
-          hpw2 * 1.5,
+          hpw2 * 1.1,
           hpw2 * 2.6,
         ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: colorS[1],
-                    fontSize: hpw2 * 4.8,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Inter",
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: hpw2 * 2.8,
-            ),
-            Text(
-              desc,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: colorS[1],
-                fontFamily: 'Inter',
-                fontSize: hpw2 * 3.3,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(
+                'Streetlight ${streetlight.id ?? "NaN"}',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: colorS[1],
+                  fontSize: hpw2 * 4.3,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Inter",
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: hpw2 * 2.8,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Is Working?',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: colorS[1],
+                            fontFamily: 'Inter',
+                            fontSize: hpw2 * 3.3,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          'Is Flickering?',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: colorS[1],
+                            fontFamily: 'Inter',
+                            fontSize: hpw2 * 3.3,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          'Last Service: ',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w800,
+                            color: colorS[1],
+                            fontSize: hpw2 * 3.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          toBeginningOfSentenceCase(
+                              streetlight.working.toString())!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: colorS[1],
+                            fontFamily: 'Inter',
+                            fontSize: hpw2 * 3.3,
+                          ),
+                        ),
+                        Text(
+                          toBeginningOfSentenceCase(
+                              streetlight.flickering.toString())!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: colorS[1],
+                            fontFamily: 'Inter',
+                            fontSize: hpw2 * 3.3,
+                          ),
+                        ),
+                        Text(
+                          formattedDate,
+                          overflow: TextOverflow.fade,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: colorS[1],
+                            fontFamily: 'Inter',
+                            fontSize: hpw2 * 3.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
