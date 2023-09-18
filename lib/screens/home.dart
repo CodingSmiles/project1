@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            for (int i = 1; i < 5 ; i++)
+            for (int i = 1; i < 46 ; i++)
                CustomCard(name: "Data Point $i ", desc: 'ABCD1234'),
           ],
         ),
