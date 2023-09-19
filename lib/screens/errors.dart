@@ -18,11 +18,18 @@ class _ErrorsState extends State<Errors> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade900,
-        title: const Text(
-          "Errors",
+        title: Icon(
+          Icons.error,
+          size: hpw2 * 5,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.person),
+          ),
+        ],
       ),
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.only(
           left: 12.5,
           top: 12.5,
@@ -31,7 +38,7 @@ class _ErrorsState extends State<Errors> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            for (int i = 1; i < 5 ; i++)
+            for (int i = 1; i < 5; i++)
               CustomCard(name: "Data Point $i", desc: 'ABCD1234'),
           ],
         ),

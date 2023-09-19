@@ -1,4 +1,3 @@
-import 'package:app1/models/streetlight.dart';
 import 'package:app1/screens/errors.dart';
 import 'package:app1/screens/home.dart';
 import 'package:app1/screens/splash.dart';
@@ -12,23 +11,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   var db = FirebaseFirestore.instance;
-  var data = await db
-      .collection('cities')
-      .doc('mumbai')
-      .collection('strlghts')
-      .orderBy('id', descending: false)
-      .get();
-  cities = List.from(
-    data.docs.map(
-      (doc) => Streetlight.fromSnapshot(doc),
-    ),
-  );
+
+  var data = await db.collection('cities').get();
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Project 1",
       home: Splash(
         cities: cities,
+        data: data,
       ),
       theme: ThemeData(
         navigationBarTheme: const NavigationBarThemeData(
@@ -40,7 +32,7 @@ void main() async {
         ),
         appBarTheme: AppBarTheme(
           color: Colors.blue.shade900,
-          centerTitle: true,
+          centerTitle: false,
           titleTextStyle: const TextStyle(
             fontFamily: 'Inter',
             fontSize: 30,
@@ -53,8 +45,9 @@ void main() async {
 
 class Main extends StatefulWidget {
   final List cities;
+  final QuerySnapshot<Map<String, dynamic>> data;
 
-  const Main({super.key, required this.cities});
+  const Main({super.key, required this.cities, required this.data});
 
   @override
   State<Main> createState() => _MainState();
@@ -70,8 +63,9 @@ class _MainState extends State<Main> {
   void initState() {
     super.initState();
     List cities = widget.cities;
+    QuerySnapshot<Map<String, dynamic>> data = widget.data;
     pages = [
-      Home(cities: cities),
+      Home(cities: cities, data: data),
       const Errors(),
     ];
   }

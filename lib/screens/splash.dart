@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:app1/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
   final List cities;
-  const Splash({super.key, required this.cities});
+  final QuerySnapshot<Map<String, dynamic>> data;
+
+  const Splash({super.key, required this.cities, required this.data});
 
   @override
   State<Splash> createState() => _SplashState();
@@ -17,12 +20,17 @@ class _SplashState extends State<Splash> {
     super.initState();
     Timer(
       const Duration(milliseconds: 1300),
-          () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => Main(cities: widget.cities)),
-                (route) => false,
-          );
+      () {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (_) => Main(
+              cities: widget.cities,
+              data: widget.data,
+            ),
+          ),
+          (route) => false,
+        );
       },
     );
   }

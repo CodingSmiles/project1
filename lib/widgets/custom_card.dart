@@ -81,7 +81,6 @@ class CustomCard extends StatelessWidget {
           const Color.fromRGBO(16, 24, 32, 1), // Color
           Colors.white, // Text color (white)
         ],
-
         [
           const Color.fromRGBO(249, 231, 149, 1), // Color
           Colors.black, // Text color (black)
