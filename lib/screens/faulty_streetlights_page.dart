@@ -26,6 +26,10 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size; // get screen size
+    final double width = size.width; // get screen width
+    final double height = size.height; // get screen height
+    final double hpw2 = (height + width) / 200;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade900,
