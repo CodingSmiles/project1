@@ -53,7 +53,10 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
                 },
               );
             } else {
-              return const Text('Loading...');
+              return const Text(
+                'Loading...',
+                style: TextStyle(fontFamily: 'Inter'),
+              );
             }
           },
         ),
