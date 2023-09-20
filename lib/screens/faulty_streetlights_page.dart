@@ -55,7 +55,8 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
             } else {
               return const Text(
                 'Loading...',
-                style: TextStyle(fontFamily: 'Inter'),
+                style:
+                    TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w800),
               );
             }
           },
