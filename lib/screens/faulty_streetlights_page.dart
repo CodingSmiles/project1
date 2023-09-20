@@ -26,10 +26,6 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size; // get screen size
-    final double width = size.width; // get screen width
-    final double height = size.height; // get screen height
-    final double hpw2 = (height + width) / 200;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade900,
@@ -48,76 +44,16 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
           stream: FirebaseFirestore.instance.collection('cities').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data.toString().isNotEmpty) {
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      const Text(
-                        "Flickering Lights in",
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                        ),
-                      ),
-                      Text(
-                        (widget.region).toTitleCase(),
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          fontSize: hpw2 * 3.6,
-                        ),
-                      )
-                    ],
-                  ),
-                  ListView.builder(
-                    itemCount: flickeringLights.length,
-                    itemBuilder: (context, index) {
-                      return StreetlightCard(
-                        streetlight: flickeringLights[index] as Streetlight,
-                      );
-                    },
-                  ),
-                  Divider(
-                    endIndent: hpw2 * 4,
-                    indent: hpw2 * 4,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 12.0),
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Inoperative Lights in",
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                          ),
-                        ),
-                        Text(
-                          (widget.region).toTitleCase(),
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
-                            fontSize: hpw2 * 3.6,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  ListView.builder(
-                    itemCount: notWorking.length,
-                    itemBuilder: (context, index) {
-                      return StreetlightCard(
-                        streetlight: notWorking[index] as Streetlight,
-                      );
-                    },
-                  ),
-                ],
+              return ListView.builder(
+                itemCount: flickeringLights.length,
+                itemBuilder: (context, index) {
+                  return StreetlightCard(
+                    streetlight: flickeringLights[index] as Streetlight,
+                  );
+                },
               );
             } else {
-              return Center(
-                child: Text(
-                  "Loading...",
-                  style: TextStyle(fontFamily: 'Inter', fontSize: hpw2 * 8),
-                ),
-              );
+              return const Text('Loading...');
             }
           },
         ),
