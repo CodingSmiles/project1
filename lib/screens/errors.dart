@@ -1,8 +1,11 @@
-import 'package:app1/widgets/custom_card.dart';
+import 'package:app1/widgets/region_fault_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Errors extends StatefulWidget {
-  const Errors({super.key});
+  final QuerySnapshot<Map<String, dynamic>> data;
+
+  const Errors({super.key, required this.data});
 
   @override
   State<Errors> createState() => _ErrorsState();
@@ -25,23 +28,67 @@ class _ErrorsState extends State<Errors> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 12.5,
-          top: 12.5,
-          right: 12.5,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            for (int i = 1; i < 5; i++)
-              CustomCard(name: "Data Point $i", desc: 'ABCD1234'),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 12.0),
+            child: Text(
+              "Region Wise Fault Detection",
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+                fontSize: hpw2 * 3.6,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 18.5,
+              top: 12.5,
+              right: 12.5,
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.data.size,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: FaultButton(
+                    r1: widget.data.docs[index].id,
+                  ),
+                );
+                // return Padding(
+                //   padding: EdgeInsets.only(
+                //     left: 12.0,
+                //     bottom: 12.0,
+                //     right: hpw2 * 12,
+                //   ),
+                //   child: OutlinedButton(
+                //     style: OutlinedButton.styleFrom(
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //     ),
+                //     onPressed: () {},
+                //     child: Text(
+                //       (widget.data.docs[index].id).toTitleCase(),
+                //       style: TextStyle(
+                //         fontFamily: 'Inter',
+                //         fontSize: hpw2 * 3,
+                //         color: Colors.red,
+                //       ),
+                //     ),
+                //   ),
+                // );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

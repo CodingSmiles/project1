@@ -11,9 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   var db = FirebaseFirestore.instance;
-
   var data = await db.collection('cities').get();
-
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -62,11 +60,14 @@ class _MainState extends State<Main> {
   @override
   void initState() {
     super.initState();
-    List cities = widget.cities;
     QuerySnapshot<Map<String, dynamic>> data = widget.data;
     pages = [
-      Home(cities: cities, data: data),
-      const Errors(),
+      Home(
+        data: data,
+      ),
+      Errors(
+        data: data,
+      ),
     ];
   }
 

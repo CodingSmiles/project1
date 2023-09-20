@@ -3,10 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  final List cities;
   final QuerySnapshot<Map<String, dynamic>> data;
 
-  const Home({super.key, required this.cities, required this.data});
+  const Home({super.key, required this.data});
 
   @override
   State<Home> createState() => _HomeState();
@@ -59,7 +58,9 @@ class _HomeState extends State<Home> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
-                  child: RegionButton(r1: widget.data.docs[index].id, cities: widget.cities,),
+                  child: RegionButton(
+                    r1: widget.data.docs[index].id,
+                  ),
                 );
                 // return Padding(
                 //   padding: EdgeInsets.only(

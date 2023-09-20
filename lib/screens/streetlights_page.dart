@@ -6,11 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StreetlightsViewer extends StatefulWidget {
-  final List cities;
   final String region;
 
-  const StreetlightsViewer(
-      {super.key, required this.cities, required this.region});
+  const StreetlightsViewer({super.key, required this.region});
 
   @override
   State<StreetlightsViewer> createState() => _StreetlightsViewerState();
@@ -59,14 +57,9 @@ class _StreetlightsViewerState extends State<StreetlightsViewer> {
               );
             } else {
               return Center(
-                child: SizedBox(
-                  height: hpw2 * 15,
-                  width: hpw2 * 15,
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.redAccent,
-                    valueColor: const AlwaysStoppedAnimation(Colors.blue),
-                    strokeWidth: hpw2 * 4,
-                  ),
+                child: Text(
+                  "Loading...",
+                  style: TextStyle(fontFamily: 'Inter', fontSize: hpw2 * 8),
                 ),
               );
             }
