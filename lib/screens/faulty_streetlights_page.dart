@@ -62,7 +62,7 @@ class _FaultyStreetlightsState extends State<FaultyStreetlights> {
                 style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w700,
-                    fontSize: hpw2 * 5.5),
+                    fontSize: hpw2 * 5.6),
               );
             }
           },
