@@ -1,6 +1,6 @@
 import 'package:app1/misc/string_extension.dart';
 import 'package:app1/models/streetlight.dart';
-import 'package:app1/widgets/streetlight_card.dart';
+import 'package:app1/widgets/working_streetlights/streetlight_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

@@ -1,9 +1,10 @@
-import 'package:app1/misc/string_extension.dart';
-import 'package:app1/screens/streetlights_page.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 
-class RegionButton extends StatelessWidget {
+import 'package:app1/misc/string_extension.dart';
+import 'package:app1/screens/faulty_streetlights/faulty_streetlights_page.dart';
+import 'package:flutter/material.dart';
+
+class FaultButton extends StatelessWidget {
   List<Color> selectColor() {
     var rng = Random();
     var colors = [
@@ -546,10 +547,7 @@ class RegionButton extends StatelessWidget {
 
   final String r1;
 
-  const RegionButton({
-    super.key,
-    required this.r1,
-  });
+  const FaultButton({super.key, required this.r1});
 
   @override
   Widget build(BuildContext context) {
@@ -564,7 +562,7 @@ class RegionButton extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => StreetlightsViewer(
+            builder: (context) => FaultyStreetlights(
               region: r1,
             ),
           ),

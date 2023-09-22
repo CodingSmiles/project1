@@ -1,10 +1,11 @@
-import 'package:app1/screens/errors.dart';
-import 'package:app1/screens/home.dart';
+import 'package:app1/screens/faulty_streetlights/errors.dart';
 import 'package:app1/screens/splash.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'misc/firebase_options.dart';
+import 'package:app1/screens/working_streetlights/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+
+import 'misc/firebase_options.dart';
 
 void main() async {
   List cities = [];

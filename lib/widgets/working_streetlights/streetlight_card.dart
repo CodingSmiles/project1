@@ -1,7 +1,8 @@
 import 'dart:math';
-import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+
 import 'package:app1/models/streetlight.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
 class StreetlightCard extends StatelessWidget {
   final Streetlight streetlight;

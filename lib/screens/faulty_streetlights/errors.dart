@@ -1,17 +1,17 @@
-import 'package:app1/widgets/region_button.dart';
+import 'package:app1/widgets/faulty_streetlights/region_fault_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
+class Errors extends StatefulWidget {
   final QuerySnapshot<Map<String, dynamic>> data;
 
-  const Home({super.key, required this.data});
+  const Errors({super.key, required this.data});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Errors> createState() => _ErrorsState();
 }
 
-class _HomeState extends State<Home> {
+class _ErrorsState extends State<Errors> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size; // get screen size
@@ -20,9 +20,9 @@ class _HomeState extends State<Home> {
     final double hpw2 = (height + width) / 200;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade900,
+        backgroundColor: Colors.red.shade900,
         title: Icon(
-          Icons.home,
+          Icons.error,
           size: hpw2 * 5,
         ),
         actions: [
@@ -38,11 +38,11 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, top: 12.0),
             child: Text(
-              "Regions",
+              "Region Wise Fault Detection",
               style: TextStyle(
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
-                fontSize: hpw2 * 4,
+                fontSize: hpw2 * 3.6,
               ),
             ),
           ),
@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
-                  child: RegionButton(
+                  child: FaultButton(
                     r1: widget.data.docs[index].id,
                   ),
                 );
